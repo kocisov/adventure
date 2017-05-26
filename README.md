@@ -1,4 +1,4 @@
-# Adventure
+# Adventure [![npm](https://img.shields.io/npm/v/@braind/adventure.svg)](http://npmjs.com/package/@braind/adventure)
 > Simple WebSocket client with dead-simple Redux integration
 
 ## Installation
@@ -15,25 +15,12 @@ npm install @braind/adventure --save
 import adventureClient from '@braind/adventure';
 
 const adventure = new adventureClient({
-  url: [string => 'ws://localhost:3000'],
   debug: [boolean],
-  messageFunction: [function],
+  handleMessage: [function],
+  reconnect: [boolean],
   reconnectInterval: [number],
-  reduxCaller: [function],
-  shouldReconnect: [boolean]
-})
-
-function reduxCaller(message) {
-  const { type, data: payload } = message;
-
-  switch(type) {
-    case 'CHAT_MESSAGE':
-      store.dispatch({
-        type: 'CHAT_MESSAGE',
-        payload
-      });
-    default:
-      console.log('Received unspecified type');
-  }
-}
+  reduxDispatcher: [function],
+  url: [string => 'ws://localhost:3000'],
+  responseType: [json, text]
+});
 ```

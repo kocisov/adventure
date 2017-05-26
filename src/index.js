@@ -1,28 +1,33 @@
 // @flow
 
 export default class Adventure {
+  calledOnOpen: boolean;
   debug: boolean;
-  messageFunction: any;
+  handleMessage: any;
   number: number;
   reconnectInterval: number;
-  reduxCaller: any;
+  reduxDispatcher: any;
   shouldReconnect: boolean;
+  responseType: 'json' | 'text';
   url: string;
   ws: any;
 
   constructor({
-    debug,
-    messageFunction,
-    reconnect,
-    reconnectInterval,
-    reduxCaller,
+    debug = false,
+    handleMessage,
+    reconnect = false,
+    reconnectInterval = 5000,
+    reduxDispatcher,
+    responseType = 'json',
     url
   }: any) {
+    this.calledOnOpen = false;
     this.debug = debug;
-    this.messageFunction = messageFunction;
+    this.handleMessage = handleMessage;
     this.number = 0;
     this.reconnectInterval = reconnectInterval;
-    this.reduxCaller = reduxCaller;
+    this.reduxDispatcher = reduxDispatcher;
+    this.responseType = responseType;
     this.shouldReconnect = reconnect;
     this.url = url;
     this.ws = new WebSocket(url);
@@ -48,6 +53,8 @@ export default class Adventure {
     if (this.debug) {
       console.log(`WebSocket > Opened at ${this.url}`);
     }
+
+    this.calledOnOpen = true;
   };
 
   onClose = (event: any) => {
@@ -84,6 +91,9 @@ export default class Adventure {
   onError = (error: any) => {
     switch (error.code) {
       case 'ECONNREFUSED':
+        if (this.debug) {
+          console.log(`WebSocket > Error: ${error}`);
+        }
         this.reConnect(error);
 
       default:
@@ -96,32 +106,36 @@ export default class Adventure {
   onMessage = (message: any) => {
     let msg = null;
 
-    try {
-      msg = JSON.parse(message.data);
-    } catch (error) {
-      if (this.debug) {
-        console.log(`Couldn't parse > ${error.data}`);
+    if (this.responseType === 'json') {
+      try {
+        msg = JSON.parse(message.data);
+      } catch (error) {
+        if (this.debug) {
+          console.log(`Couldn't parse > ${error.data}`);
+        }
       }
+    } else {
+      msg = message;
     }
 
     if (msg) {
-      if (this.reduxCaller && typeof this.reduxCaller === 'function') {
-        this.reduxCaller(msg);
+      if (this.reduxDispatcher && typeof this.reduxDispatcher === 'function') {
+        this.reduxDispatcher(msg);
       }
 
-      if (this.messageFunction && typeof this.messageFunction === 'function') {
-        this.messageFunction(msg);
+      if (this.handleMessage && typeof this.handleMessage === 'function') {
+        this.handleMessage(msg);
       }
     }
 
     this.number++;
   };
 
-  getNextSocketNumber = () => {
-    return this.number + 1;
+  nextSocketNumber = () => {
+    return this.number;
   };
 
-  getSocketNumber = () => {
-    return this.number;
+  socketNumber = () => {
+    return this.number - 1;
   };
 }

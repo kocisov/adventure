@@ -1,6 +1,6 @@
 {
   "name": "@braind/adventure",
-  "version": "0.1.0",
+  "version": "0.2.2",
   "description": "Simple WebSocket client",
   "main": "lib/index.js",
   "repository": "https://github.com/braind/adventure.git",
@@ -15,6 +15,7 @@
   "scripts": {
     "build": "yarn prettier && yarn flow && yarn rollup",
     "flow": "flow",
+    "prepublish": "yarn build",
     "prettier": "prettier --single-quote --write \"src/**/*.js\"",
     "rollup": "rollup -c"
   },
