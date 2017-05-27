@@ -1,4 +1,4 @@
-# Adventure [![npm](https://img.shields.io/npm/v/@braind/adventure.svg)](http://npmjs.com/package/@braind/adventure) [![Code Climate](https://codeclimate.com/github/braind/adventure/badges/gpa.svg)](https://codeclimate.com/github/braind/adventure) [![gzip size](http://img.badgesize.io/https://unpkg.com/@braind/adventure/lib/index.js?compression=gzip&label=gzip%20size)]
+# Adventure [![npm](https://img.shields.io/npm/v/@braind/adventure.svg)](http://npmjs.com/package/@braind/adventure) [![Code Climate](https://codeclimate.com/github/braind/adventure/badges/gpa.svg)](https://codeclimate.com/github/braind/adventure) [![gzip size](http://img.badgesize.io/https://unpkg.com/@braind/adventure/lib/index.js?compression=gzip&label=gzip%20size)]()
 > Simple WebSocket client with dead-simple Redux integration
 
 ## Installation
@@ -13,16 +13,17 @@ npm install @braind/adventure --save
 ## Usage
 ```js
 import adventureClient from '@braind/adventure';
+import store from './redux/store';
 
 const adventure = new adventureClient({
-  debug: [boolean],
-  handleMessage: [function],
-  maxReconectAttempts: [number],
-  reconnect: [boolean],
-  reconnectInterval: [number],
-  reduxDispatcher: [function],
-  responseType: [json, text],
-  url: [string => 'ws://localhost:3000']
+  debug: [boolean] default is false,
+  handleMessage: [function] optional,
+  maxReconectAttempts: [number] default is 3,
+  reconnect: [boolean] default is false,
+  reconnectInterval: [number] default is 5000ms,
+  reduxDispatcher: [function] optional,
+  responseType: [json, text] default is json,
+  url: [string => 'ws://localhost:3000'] required
 });
 
 function handleMessage(message) {
