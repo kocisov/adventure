@@ -141,6 +141,10 @@ export default class Adventure {
     return this.number;
   };
 
+  lastSocketNumber = () => {
+    return this.number - 1;
+  };
+
   socketNumber = () => {
     if (this.number !== 0) {
       return this.number - 1;

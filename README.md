@@ -47,6 +47,7 @@ function reduxDispatcher(message) {
   }
 }
 
-let currentSocketNumber = adventure.socketNumber();
-let nextSocketNumber = adventure.nextSocketNumber();
+const currentSocketNumber = adventure.socketNumber();
+const nextSocketNumber = adventure.nextSocketNumber();
+const lastSocketNumber = adventure.lastSocketNumber();
 ```
