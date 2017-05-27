@@ -72,7 +72,9 @@ export default class Adventure {
   };
 
   reConnect = (event: any) => {
-    if (!this.shouldReconnect) return false;
+    if (!this.shouldReconnect) {
+      return false;
+    }
 
     if (this.debug) {
       console.log(
@@ -131,11 +133,18 @@ export default class Adventure {
     this.number++;
   };
 
+  send = (data: any) => {
+    this.ws.send(data);
+  };
+
   nextSocketNumber = () => {
     return this.number;
   };
 
   socketNumber = () => {
-    return this.number - 1;
+    if (this.number !== 0) {
+      return this.number - 1;
+    }
+    return 0;
   };
 }

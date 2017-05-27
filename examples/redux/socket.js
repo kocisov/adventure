@@ -21,5 +21,6 @@ export default new adventureClient({
   debug: true,
   reduxDispatcher,
   reconnect: true,
-  reconnectInterval: 5000
+  reconnectInterval: 5000,
+  responseType: 'json'
 });
