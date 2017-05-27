@@ -17,6 +17,7 @@ import store from './redux/store';
 
 const adventure = new adventureClient({
   debug: [boolean] default is false,
+  handleError: [function] optional,
   handleMessage: [function] optional,
   maxReconectAttempts: [number] default is 3,
   reconnect: [boolean] default is false,

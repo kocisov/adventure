@@ -3,6 +3,7 @@
 export default class Adventure {
   calledOnOpen: boolean;
   debug: boolean;
+  handleError: any;
   handleMessage: any;
   intervalId: any;
   maxReconnectAttempts: number;
@@ -18,6 +19,7 @@ export default class Adventure {
 
   constructor({
     debug = false,
+    handleError,
     handleMessage,
     maxReconnectAttempts = 3,
     reconnect = false,
@@ -28,6 +30,7 @@ export default class Adventure {
   }: any) {
     this.calledOnOpen = false;
     this.debug = debug;
+    this.handleError = handleError;
     this.handleMessage = handleMessage;
     this.maxReconnectAttempts = maxReconnectAttempts;
     this.number = 0;
@@ -43,7 +46,13 @@ export default class Adventure {
   }
 
   open = () => {
-    this.ws = new WebSocket(this.url);
+    try {
+      this.ws = new WebSocket(this.url);
+    } catch (e) {
+      if (this.debug) {
+        console.log(`WebSocket > Error when connecting ${e}`);
+      }
+    }
 
     this.ws.onopen = () => {
       this.onOpen();
@@ -144,6 +153,10 @@ export default class Adventure {
   };
 
   onError = (error: any) => {
+    if (this.handleError && typeof this.handleError === 'function') {
+      this.handleError(error);
+    }
+
     switch (error.code) {
       case 'ECONNREFUSED':
         if (this.debug) {

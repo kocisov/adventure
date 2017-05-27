@@ -1,7 +1,7 @@
 {
   "name": "@braind/adventure",
   "description": "Simple WebSocket client",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "author": "braind",
   "bugs": "https://github.com/braind/adventure/issues",
   "devDependencies": {
