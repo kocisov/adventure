@@ -5,7 +5,7 @@ export default class Adventure {
   debug: boolean;
   handleMessage: any;
   intervalId: any;
-  maxReconectAttempts: number;
+  maxReconnectAttempts: number;
   number: number;
   reconnectAttempts: number;
   reconnecting: boolean;
@@ -141,7 +141,7 @@ export default class Adventure {
     clearInterval(this.intervalId);
     this.reconnecting = false;
     this.reconnectAttempts = 0;
-  }
+  };
 
   onError = (error: any) => {
     switch (error.code) {
