@@ -1,4 +1,4 @@
-# Adventure [![npm](https://img.shields.io/npm/v/@braind/adventure.svg)](http://npmjs.com/package/@braind/adventure) [![Code Climate](https://codeclimate.com/github/braind/adventure/badges/gpa.svg)](https://codeclimate.com/github/braind/adventure)
+# Adventure [![npm](https://img.shields.io/npm/v/@braind/adventure.svg)](http://npmjs.com/package/@braind/adventure) [![Code Climate](https://codeclimate.com/github/braind/adventure/badges/gpa.svg)](https://codeclimate.com/github/braind/adventure) [![gzip size]](http://img.badgesize.io/https://unpkg.com/@braind/adventure/lib/index.js?compression=gzip&label=gzip%20size)
 > Simple WebSocket client with dead-simple Redux integration
 
 ## Installation
