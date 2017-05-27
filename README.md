@@ -17,11 +17,12 @@ import adventureClient from '@braind/adventure';
 const adventure = new adventureClient({
   debug: [boolean],
   handleMessage: [function],
+  maxReconectAttempts: [number],
   reconnect: [boolean],
   reconnectInterval: [number],
   reduxDispatcher: [function],
-  url: [string => 'ws://localhost:3000'],
-  responseType: [json, text]
+  responseType: [json, text],
+  url: [string => 'ws://localhost:3000']
 });
 
 function handleMessage(message) {
