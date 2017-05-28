@@ -22,7 +22,7 @@ import store from './redux/store';
 const adventure = new adventureClient({
   debug: true,
   handleMessage,
-  maxReconectAttempts: 5,
+  maxReconnectAttempts: 5,
   reconnect: true,
   reconnectInterval: 5000,
   reduxDispatcher,
@@ -67,7 +67,7 @@ Creates Adventure Client
 - debug: boolean - default is false,
 - handleError: function - optional,
 - handleMessage: function - optional,
-- maxReconectAttempts: number - default is 3,
+- maxReconnectAttempts: number - default is 3,
 - reconnect: boolean - default is false,
 - reconnectInterval: number - default is 5000ms,
 - reduxDispatcher: function - optional,
